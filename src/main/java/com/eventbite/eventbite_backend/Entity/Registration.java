@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 public class Registration {
 
     @Id
-    private int id;
+    private long id;
 
     private String guestName;
 

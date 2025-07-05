@@ -12,7 +12,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 public class EventResponseDTO {
-    private int id;
+    private long id;
     private String title;
     private String description;
     private LocalDateTime eventDate;

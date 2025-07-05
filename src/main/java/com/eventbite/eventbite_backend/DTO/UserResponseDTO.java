@@ -12,7 +12,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 public class UserResponseDTO {
-    private int id;
+    private long id;
     private String username;
     private String email;
     private String password;
