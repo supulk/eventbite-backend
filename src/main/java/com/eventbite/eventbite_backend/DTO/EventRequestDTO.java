@@ -1,0 +1,21 @@
+package com.eventbite.eventbite_backend.DTO;
+
+import com.eventbite.eventbite_backend.Entity.Registration;
+import com.eventbite.eventbite_backend.Entity.User;
+import lombok.Data;
+
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+
+@Data
+public class EventRequestDTO {
+    private String title;
+    private String description;
+    private LocalDateTime eventDate;
+    private String location;
+    private String publicId;
+    private LocalDateTime dateCreated;
+    private User organizer;
+    private List<Registration> registrations = new ArrayList<>();
+}

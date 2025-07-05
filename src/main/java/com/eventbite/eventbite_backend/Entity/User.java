@@ -2,6 +2,7 @@ package com.eventbite.eventbite_backend.Entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
+
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,12 +25,13 @@ public class User {
     @Column(nullable = false, length = 8)
     private String password;
 
-    @Column(name = "date_created")
+    @Column(name = "date_created", nullable = false)
     private LocalDateTime dateCreated;
 
     @OneToMany(mappedBy = "organizer", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Event> OrganizedEvents = new ArrayList<>();
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Registrations> registrations = new ArrayList<>();
+    private List<Registration> registrations = new ArrayList<>();
+
 }

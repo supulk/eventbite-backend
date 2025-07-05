@@ -21,7 +21,7 @@ public class Event {
     private String description;
 
     @Column(nullable = false)
-    private LocalDateTime Eventdate;
+    private LocalDateTime eventDate;
 
     @Column(nullable = false)
     private String location;
@@ -37,5 +37,5 @@ public class Event {
     private User organizer;
 
     @OneToMany(mappedBy = "event")
-    private List<Registrations> registrations = new ArrayList<>();
+    private List<Registration> registrations = new ArrayList<>();
 }

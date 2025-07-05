@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 @Entity
 @Data
 @Table(name = "registration")
-public class Registrations {
+public class Registration {
 
     @Id
     private int id;
@@ -19,6 +19,9 @@ public class Registrations {
 
     @Column(nullable = false)
     private String registrationType;
+
+    @Column(nullable = false)
+    private String privacy;
 
     @Column(nullable = false)
     private LocalDateTime registrationDate;
