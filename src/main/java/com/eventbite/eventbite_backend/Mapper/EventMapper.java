@@ -3,7 +3,6 @@ package com.eventbite.eventbite_backend.Mapper;
 import com.eventbite.eventbite_backend.DTO.EventRequestDTO;
 import com.eventbite.eventbite_backend.DTO.EventResponseDTO;
 import com.eventbite.eventbite_backend.Entity.Event;
-import com.eventbite.eventbite_backend.Entity.Registration;
 
 import java.util.ArrayList;
 
@@ -18,12 +17,13 @@ public class EventMapper {
         event.setEventDate(request.getEventDate());
         event.setLocation(request.getLocation());
         event.setPublicId(request.getPublicId());
+        event.setPrivacy(request.getPrivacy());
         event.setDateCreated(request.getDateCreated());
         event.setOrganizer(request.getOrganizer());
-        if (request.getRegistrations() != null){
-            event.setRegistrations(request.getRegistrations());
+        if (request.getUserRegistrations() != null){
+            event.setUserRegistrations(request.getUserRegistrations());
         }else {
-            event.setRegistrations(new ArrayList<>());
+            event.setUserRegistrations(new ArrayList<>());
         }
 
 
@@ -38,9 +38,10 @@ public class EventMapper {
                 entity.getEventDate(),
                 entity.getLocation(),
                 entity.getPublicId(),
+                entity.getPrivacy(),
                 entity.getDateCreated(),
                 entity.getOrganizer(),
-                entity.getRegistrations()
+                entity.getUserRegistrations()
         );
     }
 
@@ -60,14 +61,17 @@ public class EventMapper {
         if (request.getPublicId() != null){
             existing.setPublicId(request.getPublicId());
         }
+        if (request.getPrivacy() != null){
+            existing.setPrivacy(request.getPrivacy());
+        }
         if (request.getDateCreated() != null){
             existing.setDateCreated(request.getDateCreated());
         }
         if (request.getOrganizer() != null){
             existing.setOrganizer(request.getOrganizer());
         }
-        if (request.getRegistrations() != null){
-            existing.setRegistrations(request.getRegistrations());
+        if (request.getUserRegistrations() != null){
+            existing.setUserRegistrations(request.getUserRegistrations());
         }
     }
 }

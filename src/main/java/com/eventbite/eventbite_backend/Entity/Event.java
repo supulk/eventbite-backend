@@ -13,6 +13,7 @@ import java.util.List;
 public class Event {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @Column(nullable = false)
@@ -30,6 +31,9 @@ public class Event {
     private String publicId;
 
     @Column(nullable = false)
+    private String privacy;
+
+    @Column(nullable = false)
     private LocalDateTime dateCreated;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -37,7 +41,7 @@ public class Event {
     private User organizer;
 
     @OneToMany(mappedBy = "event")
-    private List<Registration> registrations = new ArrayList<>();
+    private List<UserRegistration> userRegistrations = new ArrayList<>();
 
     @OneToMany(mappedBy = "event")
     private List<GuestRegistration> GuestRegistrations = new ArrayList<>();

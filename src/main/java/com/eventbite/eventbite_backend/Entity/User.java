@@ -32,6 +32,6 @@ public class User {
     private List<Event> OrganizedEvents = new ArrayList<>();
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Registration> registrations = new ArrayList<>();
+    private List<UserRegistration> userRegistrations = new ArrayList<>();
 
 }

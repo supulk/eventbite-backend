@@ -1,6 +1,6 @@
 package com.eventbite.eventbite_backend.DTO;
 
-import com.eventbite.eventbite_backend.Entity.Registration;
+import com.eventbite.eventbite_backend.Entity.UserRegistration;
 import com.eventbite.eventbite_backend.Entity.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -18,7 +18,8 @@ public class EventResponseDTO {
     private LocalDateTime eventDate;
     private String location;
     private String publicId;
+    private String privacy;
     private LocalDateTime dateCreated;
     private User organizer;
-    private List<Registration> registrations = new ArrayList<>();
+    private List<UserRegistration> userRegistrations = new ArrayList<>();
 }

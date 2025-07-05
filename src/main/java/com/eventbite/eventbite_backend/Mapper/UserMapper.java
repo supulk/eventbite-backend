@@ -12,7 +12,7 @@ public class UserMapper {
         user.setPassword(request.getPassword());
         user.setDateCreated(request.getDateCreated());
         user.setOrganizedEvents(request.getOrganizedEvents());
-        user.setRegistrations(request.getRegistrations());
+        user.setUserRegistrations(request.getUserRegistrations());
 
         return user;
     }
@@ -26,7 +26,7 @@ public class UserMapper {
                 user.getPassword(),
                 user.getDateCreated(),
                 user.getOrganizedEvents(),
-                user.getRegistrations()
+                user.getUserRegistrations()
         );
     }
 
@@ -46,8 +46,8 @@ public class UserMapper {
         if (request.getOrganizedEvents() != null){
             existing.setOrganizedEvents(request.getOrganizedEvents());
         }
-        if (request.getRegistrations() != null){
-            existing.setRegistrations(request.getRegistrations());
+        if (request.getUserRegistrations() != null){
+            existing.setUserRegistrations(request.getUserRegistrations());
         }
 
     }
