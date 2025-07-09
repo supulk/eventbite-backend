@@ -22,16 +22,16 @@ public class User {
     @Column(nullable = false, unique = true)
     private String email;
 
-    @Column(nullable = false, length = 8)
+    @Column(nullable = false)
     private String password;
 
     @Column(name = "date_created", nullable = false)
     private LocalDateTime dateCreated;
 
     @OneToMany(mappedBy = "organizer", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Event> OrganizedEvents = new ArrayList<>();
+    private List<Event> OrganizedEvents;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<UserRegistration> userRegistrations = new ArrayList<>();
+    private List<UserRegistration> userRegistrations;
 
 }

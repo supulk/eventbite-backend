@@ -15,7 +15,6 @@ public class UserResponseDTO {
     private long id;
     private String username;
     private String email;
-    private String password;
     private LocalDateTime dateCreated;
     private List<Event> OrganizedEvents = new ArrayList<>();
     private List<UserRegistration> userRegistrations = new ArrayList<>();
