@@ -10,4 +10,6 @@ public class GuestRegistrationsController {
     //guest register to a new event
 
     //guest unregister from an event
+
+    //get all registrations for an event
 }

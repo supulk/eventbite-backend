@@ -1,7 +1,7 @@
 package com.eventbite.eventbite_backend.Mapper;
 
-import com.eventbite.eventbite_backend.DTO.EventRequestDTO;
-import com.eventbite.eventbite_backend.DTO.EventResponseDTO;
+import com.eventbite.eventbite_backend.DTO.Event.EventRequestDTO;
+import com.eventbite.eventbite_backend.DTO.Event.PublicEventResponseDTO;
 import com.eventbite.eventbite_backend.Entity.Event;
 
 import java.util.ArrayList;
@@ -25,14 +25,11 @@ public class EventMapper {
         }else {
             event.setUserRegistrations(new ArrayList<>());
         }
-
-
         return event;
     }
 
-    public static EventResponseDTO toResponse(Event entity){
-        return new EventResponseDTO(
-                entity.getId(),
+    public static PublicEventResponseDTO toPublicResponse(Event entity){
+        return new PublicEventResponseDTO(
                 entity.getTitle(),
                 entity.getDescription(),
                 entity.getEventDate(),
@@ -40,8 +37,7 @@ public class EventMapper {
                 entity.getPublicId(),
                 entity.getPrivacy(),
                 entity.getDateCreated(),
-                entity.getOrganizer(),
-                entity.getUserRegistrations()
+                entity.getOrganizer().getUsername()
         );
     }
 

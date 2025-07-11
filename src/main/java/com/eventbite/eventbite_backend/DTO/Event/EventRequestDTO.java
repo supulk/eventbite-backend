@@ -1,8 +1,7 @@
-package com.eventbite.eventbite_backend.DTO;
+package com.eventbite.eventbite_backend.DTO.Event;
 
 import com.eventbite.eventbite_backend.Entity.UserRegistration;
 import com.eventbite.eventbite_backend.Entity.User;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import java.time.LocalDateTime;
@@ -10,9 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Data
-@AllArgsConstructor
-public class EventResponseDTO {
-    private long id;
+public class EventRequestDTO {
     private String title;
     private String description;
     private LocalDateTime eventDate;

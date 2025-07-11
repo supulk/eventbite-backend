@@ -1,5 +1,6 @@
 package com.eventbite.eventbite_backend.Controller;
 
+import com.eventbite.eventbite_backend.DTO.Auth.UserLoginRequestDTO;
 import com.eventbite.eventbite_backend.DTO.Auth.UserSignupRequestDTO;
 import com.eventbite.eventbite_backend.DTO.UserResponseDTO;
 import com.eventbite.eventbite_backend.Service.AuthService;
@@ -14,6 +15,10 @@ public class AuthController {
     AuthService authService;
 
     //login
+    @PostMapping("/login")
+    public String login(@RequestBody UserLoginRequestDTO request) throws Exception{
+        return authService.varifyUser(request);
+    }
 
 
     //signup
@@ -23,10 +28,7 @@ public class AuthController {
         try {
             response = authService.registerUser(request);
         } catch (Exception e) {
-            System.out.println("Exception at user signup " + e.getMessage());
-            System.out.println(request.getUsername());
-            System.out.println(request.getPassword());
-            System.out.println(request.getEmail());
+            System.out.println("Exception at user signup: " + e.getMessage());
         }
         return response;
     }
