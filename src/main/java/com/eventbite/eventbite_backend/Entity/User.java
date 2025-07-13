@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -25,8 +24,14 @@ public class User {
     @Column(nullable = false)
     private String password;
 
+    @Column(name = "public_id", nullable = false)
+    private String publicUserId;
+
     @Column(name = "date_created", nullable = false)
     private LocalDateTime dateCreated;
+
+    @Column(name = "settings")
+    private List<String> settings;
 
     @OneToMany(mappedBy = "organizer", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Event> OrganizedEvents;

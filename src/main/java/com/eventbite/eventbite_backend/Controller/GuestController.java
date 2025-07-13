@@ -4,7 +4,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/guest/registrations")
-public class GuestRegistrationsController {
+public class GuestController {
     //Get all registrations done by a guest
 
     //guest register to a new event

@@ -7,6 +7,7 @@ import com.eventbite.eventbite_backend.Entity.Event;
 import com.eventbite.eventbite_backend.Entity.User;
 import com.eventbite.eventbite_backend.Entity.UserRegistration;
 import com.eventbite.eventbite_backend.Repo.UserRepo;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -39,6 +40,7 @@ public class AuthService {
         user.setEmail(request.getEmail());
         user.setPassword(encoder.encode(request.getPassword()));
         user.setDateCreated(LocalDateTime.now());
+        user.setPublicUserId(generatePublicId());
         user.setOrganizedEvents(new ArrayList<Event>());
         user.setUserRegistrations(new ArrayList<UserRegistration>());
 
@@ -63,5 +65,14 @@ public class AuthService {
         if (authentication.isAuthenticated()){
             return jwtService.generateToken(request.getEmail());
         }else {return "Invalid";}
+    }
+
+
+    public String generatePublicId(){
+        String id;
+        do {
+            id = RandomStringUtils.randomAlphanumeric(10);
+        }while(repo.existsByPublicUserId(id));
+        return "U" + id;
     }
 }

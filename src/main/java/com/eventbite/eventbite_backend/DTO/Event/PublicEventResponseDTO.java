@@ -16,4 +16,5 @@ public class PublicEventResponseDTO {
     private String privacy;
     private LocalDateTime dateCreated;
     private String organizerName;
+    private String organizerId;
 }
