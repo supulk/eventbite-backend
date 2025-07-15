@@ -2,7 +2,7 @@ package com.eventbite.eventbite_backend.Controller;
 
 import com.eventbite.eventbite_backend.DTO.Auth.UserLoginRequestDTO;
 import com.eventbite.eventbite_backend.DTO.Auth.UserSignupRequestDTO;
-import com.eventbite.eventbite_backend.DTO.UserResponseDTO;
+import com.eventbite.eventbite_backend.DTO.User.UserPrivateProfileResponseDTO;
 import com.eventbite.eventbite_backend.Service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -23,8 +23,8 @@ public class AuthController {
 
     //signup
     @PostMapping("/signup")
-    public UserResponseDTO signup(@RequestBody UserSignupRequestDTO request) throws Exception {
-        UserResponseDTO response = null;
+    public UserPrivateProfileResponseDTO signup(@RequestBody UserSignupRequestDTO request) throws Exception {
+        UserPrivateProfileResponseDTO response = null;
         try {
             response = authService.registerUser(request);
         } catch (Exception e) {

@@ -2,7 +2,7 @@ package com.eventbite.eventbite_backend.Service;
 
 import com.eventbite.eventbite_backend.DTO.Auth.UserLoginRequestDTO;
 import com.eventbite.eventbite_backend.DTO.Auth.UserSignupRequestDTO;
-import com.eventbite.eventbite_backend.DTO.UserResponseDTO;
+import com.eventbite.eventbite_backend.DTO.User.UserPrivateProfileResponseDTO;
 import com.eventbite.eventbite_backend.Entity.Event;
 import com.eventbite.eventbite_backend.Entity.User;
 import com.eventbite.eventbite_backend.Entity.UserRegistration;
@@ -31,7 +31,7 @@ public class AuthService {
 
 
 
-    public UserResponseDTO registerUser(UserSignupRequestDTO request) throws Exception {
+    public UserPrivateProfileResponseDTO registerUser(UserSignupRequestDTO request) throws Exception {
         if (repo.findByEmail(request.getEmail()) != null){
             throw new Exception("User Already exists");
         }
@@ -46,11 +46,11 @@ public class AuthService {
 
         User savedUser = repo.save(user);
 
-        return new UserResponseDTO(
-                savedUser.getId(),
+        return new UserPrivateProfileResponseDTO(
                 savedUser.getUsername(),
                 savedUser.getEmail(),
-                savedUser.getDateCreated(),
+                savedUser.getPublicUserId(),
+                savedUser.getDateCreated().toString(),
                 savedUser.getOrganizedEvents(),
                 savedUser.getUserRegistrations()
         );

@@ -4,13 +4,18 @@ import com.eventbite.eventbite_backend.Entity.Event;
 import com.eventbite.eventbite_backend.Entity.UserRegistration;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 
 @Data
 @AllArgsConstructor
-public class UserPublicProfileResponseDTO {
+@NoArgsConstructor
+public class UserPrivateProfileResponseDTO {
     private String username;
+    private String email;
     private String publicId;
     private String dateCreated;
+    private List<Event> OrganizedEvents;
+    private List<UserRegistration> userRegistrations;
 }

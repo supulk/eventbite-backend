@@ -54,4 +54,22 @@ public class GlobalExceptionHandler {
         ApiResponse<String> response = new ApiResponse<>(false, e.getMessage(), null);
         return ResponseEntity.status(HttpStatus.FORBIDDEN).body(response);
     }
+
+    @ExceptionHandler(UserNotFoundException.class)
+    public ResponseEntity<ApiResponse<String>> handleUserNotFoundException(UserNotFoundException e){
+        ApiResponse<String> response = new ApiResponse<>(false, e.getMessage(), null);
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+    }
+
+    @ExceptionHandler(RegistrationsNotFoundException.class)
+    public ResponseEntity<ApiResponse<String>> handleRegistrationsNotFoundException(RegistrationsNotFoundException e){
+        ApiResponse<String> response = new ApiResponse<>(false, e.getMessage(), null);
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+    }
+
+    @ExceptionHandler(DuplicateInputException.class)
+    public ResponseEntity<ApiResponse<String>> handleDuplicateInputException(DuplicateInputException e){
+        ApiResponse<String> response = new ApiResponse<>(false, e.getMessage(), null);
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).body(response);
+    }
 }

@@ -15,4 +15,5 @@ public interface UserRegistrationRepo extends JpaRepository<UserRegistration, Lo
 
     List<UserRegistration> findByUser(User user);
 
+    UserRegistration findByUserAndEvent(User user, Event event);
 }
