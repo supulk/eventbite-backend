@@ -18,9 +18,7 @@ public class UserMapper {
                 user.getUsername(),
                 user.getEmail(),
                 user.getPublicUserId(),
-                user.getDateCreated().toString(),
-                user.getOrganizedEvents(),
-                user.getUserRegistrations()
+                user.getDateCreated().toString()
         );
     }
 }

@@ -51,8 +51,8 @@ public class GlobalExceptionHandler {
     //Unauthorized Request
     @ExceptionHandler(UnauthoriedRequest.class)
     public ResponseEntity<ApiResponse<String>> handleUnauthoriedRequestException(UnauthoriedRequest e){
-        ApiResponse<String> response = new ApiResponse<>(false, e.getMessage(), null);
-        return ResponseEntity.status(HttpStatus.FORBIDDEN).body(response);
+        ApiResponse<String> response = new ApiResponse<>(false, e.getMessage(), "unauthorized");
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
     }
 
     @ExceptionHandler(UserNotFoundException.class)
@@ -69,7 +69,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(DuplicateInputException.class)
     public ResponseEntity<ApiResponse<String>> handleDuplicateInputException(DuplicateInputException e){
-        ApiResponse<String> response = new ApiResponse<>(false, e.getMessage(), null);
+        ApiResponse<String> response = new ApiResponse<>(false, e.getMessage(), "duplicate");
         return ResponseEntity.status(HttpStatus.FORBIDDEN).body(response);
     }
 }

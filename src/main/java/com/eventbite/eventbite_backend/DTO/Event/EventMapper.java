@@ -35,7 +35,6 @@ public class EventMapper {
         event.setLocation(request.getLocation());
         event.setPrivacy(request.getPrivacy());
         event.setDateCreated(request.getDateCreated());
-        event.setOrganizer(userRepo.findByPublicUserId(request.getUserId()));
         event.setPublicId(request.getPublicId());
         if (request.getUserRegistrations() != null){
             event.setUserRegistrations(request.getUserRegistrations());
@@ -111,9 +110,6 @@ public class EventMapper {
         }
         if (request.getDateCreated() != null){
             existing.setDateCreated(request.getDateCreated());
-        }
-        if (request.getUserId() != null){
-            existing.setOrganizer(userRepo.findByPublicUserId(request.getUserId()));
         }
         if (request.getUserRegistrations() != null){
             existing.setUserRegistrations(request.getUserRegistrations());

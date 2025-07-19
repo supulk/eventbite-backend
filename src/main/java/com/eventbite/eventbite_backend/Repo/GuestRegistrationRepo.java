@@ -13,4 +13,6 @@ public interface GuestRegistrationRepo extends JpaRepository<GuestRegistration, 
     List<GuestRegistration> findByEvent(Event event);
 
     List<GuestRegistration> findByEmail(String email);
+
+    GuestRegistration findByEmailAndEvent(String email, Event event);
 }

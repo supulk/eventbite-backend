@@ -16,6 +16,4 @@ public class UserPrivateProfileResponseDTO {
     private String email;
     private String publicId;
     private String dateCreated;
-    private List<Event> OrganizedEvents;
-    private List<UserRegistration> userRegistrations;
 }

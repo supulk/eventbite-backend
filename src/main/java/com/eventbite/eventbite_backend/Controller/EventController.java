@@ -4,7 +4,14 @@ import com.eventbite.eventbite_backend.DTO.APIResponse.ApiResponse;
 import com.eventbite.eventbite_backend.DTO.Event.EventRequestDTO;
 import com.eventbite.eventbite_backend.DTO.Event.PrivateEventResponseDTO;
 import com.eventbite.eventbite_backend.DTO.Event.PublicEventResponseDTO;
+import com.eventbite.eventbite_backend.DTO.Guest.PublicGuestResponseDTO;
+import com.eventbite.eventbite_backend.DTO.User.UserPublicProfileResponseDTO;
+import com.eventbite.eventbite_backend.Entity.Event;
+import com.eventbite.eventbite_backend.Entity.GuestRegistration;
 import com.eventbite.eventbite_backend.Exception.EventNotfoundException;
+import com.eventbite.eventbite_backend.Exception.UnauthoriedRequest;
+import com.eventbite.eventbite_backend.Repo.GuestRegistrationRepo;
+import com.eventbite.eventbite_backend.Repo.UserRegistrationRepo;
 import com.eventbite.eventbite_backend.Service.EventService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +23,6 @@ import java.util.List;
 @RestController
 @RequestMapping("/event")
 public class EventController {
-
     @Autowired
     EventService service;
 
@@ -29,10 +35,17 @@ public class EventController {
     }
 
 
-    @GetMapping("/get-all-by-user")
-    public ResponseEntity<ApiResponse<List<PrivateEventResponseDTO>>> getAllEventsByUser(@Valid @RequestParam String id, @RequestHeader("Authorization") String authHeader) throws EventNotfoundException {
-        List<PrivateEventResponseDTO> eventList = service.getAllByUser(id, authHeader);
-        ApiResponse<List<PrivateEventResponseDTO>> response = new ApiResponse<>(true, "Events Found", eventList);
+    @GetMapping("/get-all-user-registrations")
+    public ResponseEntity<ApiResponse<List<UserPublicProfileResponseDTO>>> getAllUserRegistrations(@Valid @RequestParam String EventId, @RequestHeader("Authorization") String authHeader) throws EventNotfoundException,UnauthoriedRequest {
+        List<UserPublicProfileResponseDTO> returnList = service.getAllUserRegistrations(EventId, authHeader);
+        ApiResponse<List<UserPublicProfileResponseDTO>> response = new ApiResponse<>(true, "Users Found", returnList);
+        return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/get-all-guest-registrations")
+    public ResponseEntity<ApiResponse<List<PublicGuestResponseDTO>>> getAllGuestRegistrations(@Valid @RequestParam String EventId, @RequestHeader("Authorization") String authHeader) throws EventNotfoundException,UnauthoriedRequest {
+        List<PublicGuestResponseDTO> returnList = service.getAllGuestRegistrations(EventId, authHeader);
+        ApiResponse<List<PublicGuestResponseDTO>> response = new ApiResponse<>(true, "Guests Found", returnList);
         return ResponseEntity.ok(response);
     }
 
@@ -54,10 +67,9 @@ public class EventController {
 
     //delete event (auth needed)
     @DeleteMapping("/delete")
-    public ResponseEntity<ApiResponse<PrivateEventResponseDTO>> deleteEvent(@Valid @RequestBody EventRequestDTO request, @RequestHeader("Authorization") String authHeader) throws EventNotfoundException {
-        PrivateEventResponseDTO dto = service.deleteEvent(request, authHeader);
+    public ResponseEntity<ApiResponse<PrivateEventResponseDTO>> deleteEvent(@Valid @RequestParam String EventId, @RequestHeader("Authorization") String authHeader) throws EventNotfoundException {
+        PrivateEventResponseDTO dto = service.deleteEvent(EventId, authHeader);
         ApiResponse<PrivateEventResponseDTO> response = new ApiResponse<>(true, "Event Deleted", dto);
         return ResponseEntity.ok(response);
     }
-
 }

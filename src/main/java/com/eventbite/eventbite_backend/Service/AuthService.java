@@ -6,12 +6,15 @@ import com.eventbite.eventbite_backend.DTO.User.UserPrivateProfileResponseDTO;
 import com.eventbite.eventbite_backend.Entity.Event;
 import com.eventbite.eventbite_backend.Entity.User;
 import com.eventbite.eventbite_backend.Entity.UserRegistration;
+import com.eventbite.eventbite_backend.Exception.DuplicateInputException;
+import com.eventbite.eventbite_backend.Exception.UnauthoriedRequest;
 import com.eventbite.eventbite_backend.Repo.UserRepo;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -31,9 +34,9 @@ public class AuthService {
 
 
 
-    public UserPrivateProfileResponseDTO registerUser(UserSignupRequestDTO request) throws Exception {
+    public UserPrivateProfileResponseDTO registerUser(UserSignupRequestDTO request) throws DuplicateInputException {
         if (repo.findByEmail(request.getEmail()) != null){
-            throw new Exception("User Already exists");
+            throw new DuplicateInputException("User Already exists");
         }
         User user = new User();
         user.setUsername(request.getUsername());
@@ -50,21 +53,24 @@ public class AuthService {
                 savedUser.getUsername(),
                 savedUser.getEmail(),
                 savedUser.getPublicUserId(),
-                savedUser.getDateCreated().toString(),
-                savedUser.getOrganizedEvents(),
-                savedUser.getUserRegistrations()
+                savedUser.getDateCreated().toString()
         );
     }
 
 
 
 
-    public String varifyUser(UserLoginRequestDTO request) {
-        Authentication authentication = authManager.authenticate(new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword()));
-
-        if (authentication.isAuthenticated()){
-            return jwtService.generateToken(request.getEmail());
-        }else {return "Invalid";}
+    public String varifyUser(UserLoginRequestDTO request) throws UnauthoriedRequest,AuthenticationException {
+        try{
+            Authentication authentication = authManager.authenticate(new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword()));
+            if (authentication.isAuthenticated()){
+                return jwtService.generateToken(request.getEmail());
+            }else {
+                throw new UnauthoriedRequest("Invalid Credentials");
+            }
+        } catch (AuthenticationException e) {
+            throw new UnauthoriedRequest("Invalid Credentials");
+        }
     }
 
 

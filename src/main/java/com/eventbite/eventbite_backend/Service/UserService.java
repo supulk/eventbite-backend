@@ -18,6 +18,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -43,7 +44,6 @@ public class UserService {
     public Object getProfile(@Valid String id, String authHeader) throws UserNotFoundException {
         if (id.equals("null")){
             User user = repo.findByEmail(eventService.getEmailFromHeader(authHeader));
-            userMapper.entityToPrivateProfile(user);userMapper.entityToPrivateProfile(user);
             return userMapper.entityToPrivateProfile(user);
         }else {
             User user = repo.findByPublicUserId(id);
@@ -58,6 +58,7 @@ public class UserService {
         return new UserSettingsDTO(user.getSettings());
     }
 
+    @Transactional
     public UserSettingsDTO updateSettings(@Valid UserSettingsDTO request, String authHeader) throws UserNotFoundException {
         User user = repo.findByEmail(eventService.getEmailFromHeader(authHeader));
         if (user==null){throw new UserNotFoundException("User not found");}
@@ -65,6 +66,7 @@ public class UserService {
         return new UserSettingsDTO(user.getSettings());
     }
 
+    @Transactional
     public String deleteProfile(@Valid UserPasswordVariificationDTO request, String authHeader) throws UserNotFoundException {
         User user = repo.findByEmail(eventService.getEmailFromHeader(authHeader));
         if (user==null){throw new UserNotFoundException("User not found");}
@@ -78,6 +80,7 @@ public class UserService {
         }
     }
 
+    @Transactional
     public String changePassword(@Valid UserPasswordChangeRequestDTO request, String authHeader) throws UserNotFoundException {
         User user = repo.findByEmail(eventService.getEmailFromHeader(authHeader));
         if (user==null){throw new UserNotFoundException("User not found");}
@@ -121,6 +124,7 @@ public class UserService {
         return dtoList;
     }
 
+    @Transactional
     public String registerToEvent(@Valid String eventId, String authHeader) throws DuplicateInputException {
         UserRegistration existing = userRegistrationRepo.findByUserAndEvent(repo.findByEmail(eventService.getEmailFromHeader(authHeader)), eventRepo.searchByPublicId(eventId));
         if (existing != null){
@@ -135,6 +139,7 @@ public class UserService {
         return "Registered";
     }
 
+    @Transactional
     public String unregisterEvent(@Valid String eventId, String authHeader) throws RegistrationsNotFoundException {
         UserRegistration existing = userRegistrationRepo.findByUserAndEvent(repo.findByEmail(eventService.getEmailFromHeader(authHeader)), eventRepo.searchByPublicId(eventId));
         if (existing == null){

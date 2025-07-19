@@ -2,13 +2,15 @@ package com.eventbite.eventbite_backend.Entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
 @Data
-@Table(name = "user")
+@Table(name = "app-user")
 public class User {
 
     @Id
@@ -30,7 +32,8 @@ public class User {
     @Column(name = "date_created", nullable = false)
     private LocalDateTime dateCreated;
 
-    @Column(name = "settings")
+    @JdbcTypeCode(SqlTypes.JSON)
+    @Column(name = "settings", columnDefinition = "jsonb")
     private List<String> settings;
 
     @OneToMany(mappedBy = "organizer", cascade = CascadeType.ALL, fetch = FetchType.LAZY)

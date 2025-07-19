@@ -18,7 +18,6 @@ public class EventRequestDTO {
     private String publicId;
     private String privacy;
     private LocalDateTime dateCreated;
-    private String userId;
     private List<UserRegistration> userRegistrations;
     private List<GuestRegistration> guestRegistrations;
 }
