@@ -17,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -40,6 +41,8 @@ public class UserService {
     UserRegistrationRepo userRegistrationRepo;
     @Autowired
     private AuthenticationManager authManager;
+
+    private BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(12);
 
     public Object getProfile(@Valid String id, String authHeader) throws UserNotFoundException {
         if (id.equals("null")){
@@ -87,7 +90,7 @@ public class UserService {
 
         Authentication authentication = authManager.authenticate(new UsernamePasswordAuthenticationToken(user.getEmail(), request.getOldPassword()));
         if (authentication.isAuthenticated()){
-            user.setPassword(request.getNewPassword());
+            user.setPassword(encoder.encode(request.getNewPassword()));
             return "Password Updated";
         }else {
             throw new UnauthoriedRequest("Invalid credentials");

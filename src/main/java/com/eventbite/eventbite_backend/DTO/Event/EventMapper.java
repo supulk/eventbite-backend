@@ -1,5 +1,7 @@
 package com.eventbite.eventbite_backend.DTO.Event;
 
+import com.eventbite.eventbite_backend.DTO.Registration.RegistrationMapper;
+import com.eventbite.eventbite_backend.DTO.Registration.RegistrationsDTO;
 import com.eventbite.eventbite_backend.Entity.Event;
 import com.eventbite.eventbite_backend.Repo.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,12 +12,15 @@ import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.util.ArrayList;
+import java.util.List;
 
 @Component
 public class EventMapper {
 
     @Autowired
     UserRepo userRepo;
+    @Autowired
+    RegistrationMapper registrationMapper;
 
 
     public Event toEntity(EventRequestDTO request){
@@ -68,6 +73,10 @@ public class EventMapper {
     }
 
     public PrivateEventResponseDTO toPrivateResponse(Event entity){
+        List<RegistrationsDTO> registrations = new ArrayList<>();
+        entity.getUserRegistrations().forEach(item -> registrations.add(registrationMapper.userEntityToDto(item)));
+        entity.getGuestRegistrations().forEach(item -> registrations.add(registrationMapper.guestEntityToDto(item)));
+
         return new PrivateEventResponseDTO(
                 entity.getTitle(),
                 entity.getDescription(),
@@ -77,8 +86,7 @@ public class EventMapper {
                 entity.getPrivacy(),
                 entity.getDateCreated(),
                 entity.getOrganizer().getPublicUserId(),
-                entity.getUserRegistrations(),
-                entity.getGuestRegistrations()
+                registrations
         );
     }
 

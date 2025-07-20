@@ -73,7 +73,7 @@ public class UserController {
         return ResponseEntity.ok(response);
     }
 
-    @PutMapping("/register")
+    @PostMapping("/register")
     public ResponseEntity<ApiResponse<String>> register(@Valid @RequestParam String eventId, @RequestHeader("Authorization") String authHeader) throws DuplicateInputException {
         String dto = service.registerToEvent(eventId, authHeader);
         ApiResponse<String> response = new ApiResponse<> (true, "", dto);
