@@ -103,18 +103,6 @@ public class EventService {
 
 
 
-    public List<PrivateEventResponseDTO> getAllByUser(String id, String authHeader) throws EventNotfoundException {
-        String email = getEmailFromHeader(authHeader);
-        User user = userRepo.findByEmail(email);
-        List<Event> eventList = repo.getAllByOrganizer(user);
-        if (eventList==null){throw new EventNotfoundException("No events found");}
-        List<PrivateEventResponseDTO> dtoList = new ArrayList<>();
-        eventList.forEach(event ->
-            dtoList.add(eventMapper.toPrivateResponse(event))
-        );
-        return dtoList;
-    }
-
 
     //add event
     public PrivateEventResponseDTO addEvent(EventRequestDTO request, String authHeader){

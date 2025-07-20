@@ -1,5 +1,6 @@
 package com.eventbite.eventbite_backend.DTO.Event;
 
+import com.eventbite.eventbite_backend.DTO.Registration.RegistrationsDTO;
 import com.eventbite.eventbite_backend.Entity.GuestRegistration;
 import com.eventbite.eventbite_backend.Entity.User;
 import com.eventbite.eventbite_backend.Entity.UserRegistration;
@@ -22,6 +23,5 @@ public class PrivateEventResponseDTO {
     private String privacy;
     private LocalDateTime dateCreated;
     private String userId;
-    private List<UserRegistration> userRegistrations;
-    private List<GuestRegistration> GuestRegistrations;
+    private List<RegistrationsDTO> Registrations;
 }
