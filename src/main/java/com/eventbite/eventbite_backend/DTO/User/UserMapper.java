@@ -3,7 +3,7 @@ package com.eventbite.eventbite_backend.DTO.User;
 import com.eventbite.eventbite_backend.Entity.User;
 import org.springframework.stereotype.Component;
 
-@Component
+
 public class UserMapper {
     public UserPublicProfileResponseDTO entityToPublicProfile(User user){
         return new UserPublicProfileResponseDTO(

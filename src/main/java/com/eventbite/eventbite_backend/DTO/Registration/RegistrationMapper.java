@@ -4,7 +4,6 @@ import com.eventbite.eventbite_backend.Entity.GuestRegistration;
 import com.eventbite.eventbite_backend.Entity.UserRegistration;
 import org.springframework.stereotype.Component;
 
-@Component
 public class RegistrationMapper {
     public RegistrationsDTO userEntityToDto(UserRegistration entity){
         RegistrationsDTO returnDto = new RegistrationsDTO();
