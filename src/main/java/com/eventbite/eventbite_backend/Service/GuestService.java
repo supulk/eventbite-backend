@@ -28,7 +28,7 @@ public class GuestService {
     EventMapper eventMapper;
     @Autowired
     EventRepo eventRepo;
-    @Autowired
+
     GuestMapper guestMapper;
 
     public List<PublicEventResponseDTO> getGuestRegistrations(@Valid GuestRegistrationsInqiryDTO inquiry) throws EventNotfoundException {

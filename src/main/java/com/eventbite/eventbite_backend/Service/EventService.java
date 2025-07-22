@@ -43,9 +43,9 @@ public class EventService {
     UserRegistrationRepo userRegistrationRepo;
     @Autowired
     GuestRegistrationRepo guestRegistrationRepo;
-    @Autowired
+
     GuestMapper guestMapper;
-    @Autowired
+
     UserMapper userMapper;
 
     //search by id

@@ -29,8 +29,9 @@ import java.util.List;
 public class UserService {
     @Autowired
     UserRepo repo;
-    @Autowired
+
     UserMapper userMapper;
+
     @Autowired
     EventService eventService;
     @Autowired

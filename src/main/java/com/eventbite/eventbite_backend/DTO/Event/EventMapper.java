@@ -19,7 +19,7 @@ public class EventMapper {
 
     @Autowired
     UserRepo userRepo;
-    @Autowired
+
     RegistrationMapper registrationMapper;
 
 
